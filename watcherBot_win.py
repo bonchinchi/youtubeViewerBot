@@ -5,10 +5,18 @@ from selenium import webdriver
 import time
 import sys
 from selenium.webdriver.chrome.options import Options
+from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
+import random
 
 font1 = ("Arial bold", 15)
 font2 = ("Arial", 14)
 font3 = ("Arial", 13)
+
+# random proxy creator
+def randomProxy():
+    listOfProxies = RequestProxy()
+    myProxy = listOfProxies.get_proxy_list()
+    return myProxy[0]
 
 class youtubeViewerBot():
     def __init__(self, root):
@@ -45,28 +53,38 @@ class youtubeViewerBot():
         downloadButton = Button(newFrame, text='Start',font = font2, fg="green", command=lambda link=link,lbl2=lbl2,lbl3=lbl3: self.viewer(link,lbl2,lbl3))
         downloadButton.grid(row=7, column=0)
 
+        
     def viewer(self,link,number,length):
+        viewCount = int(number.get())
+        for i in range(viewCount):
+            self.eachView(link,number,length)
+        myBrowser.close()
+        
+    def eachView(self,link,number,length):
         myOption = Options()
-
+        # each time assigning random proxy
+        randomTaker = randomProxy()
+        currentProxy = randomTaker.get_address()
+        thisSetting = webdriver.DesiredCapabilities.CHROME.copy()
+        thisSetting['proxy']={
+        "httpProxy":currentProxy,
+        "ftpProxy":currentProxy,
+        "sslProxy":currentProxy,    
+        "noProxy":None,
+        "proxyType":"MANUAL",
+        "class":"org.openqa.selenium.Proxy",
+        "autodetect":False
+        }
         #######################    CHANGE TO THE FOLLOWING LINE  #############################
         myBrowser = webdriver.Chrome(executable_path=r"C:\\write\\path\\to\\your\\chromedriver.exe", options=myOption)
         #######################################################################################
-
-        viewCount = int(number.get())
         viewLength = float(length.get())
         myBrowser.get(link.get())
         time.sleep(10)
         element = myBrowser.find_element_by_xpath("//*[@class='ytp-large-play-button ytp-button']")
         element.click()
         time.sleep(viewLength)
-
-        for i in range(viewCount-1):
-            myBrowser.get(link.get())
-            time.sleep(viewLength)
-
-        myBrowser.close()
-        myBrowser.quit()
-        root.quit()
+        
 
 
 if __name__ == '__main__':
