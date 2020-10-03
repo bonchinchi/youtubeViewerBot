@@ -76,7 +76,7 @@ class youtubeViewerBot():
         "autodetect":False
         }
         #######################    CHANGE TO THE FOLLOWING LINE  #############################
-        myBrowser = webdriver.Chrome(executable_path=r"C:\\write\\path\\to\\your\\chromedriver.exe", options=myOption)
+        myBrowser = webdriver.Chrome(executable_path=r"C:\ChromeDriver", options=myOption)
         #######################################################################################
         viewLength = float(length.get())
         myBrowser.get(link.get())
