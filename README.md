@@ -9,19 +9,23 @@ Bot for increasing the number of views on Youtube 📈🤖
 
 
 ## Getting Started
-1. Change the path for ChromeDriver in watcherBot_macos.py (for MacOS) and in watcherBot_win.py (for Windows)
-2. Run the program
+1. Install packages using the following command:
+```
+$ pip install -r requirements.txt
+```
+2. Change the path for ChromeDriver in wbmac.py (for MacOS) and in wbwin.py (for Windows)
+3. Run the program
 -  MacOS: 
 ```
-$ python watcherBot_macos.py
+$ python wbmac.py
 ```
 -  Windows: 
 ```
-$ python watcherBot_win.py
+$ python wbwin.py
 ```
-3. Enter the link of the Youtube video
-4. Enter the number of views and the time for the viewing video
-5. Press "Start" button
+4. Enter the link of the Youtube video
+5. Enter the number of views and the time for the viewing video
+6. Press "Start" button
 
 
 ![1st](images/1.png)
